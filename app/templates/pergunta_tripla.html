@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ pergunta.titulo }} - Totem de Adoção{% endblock %}
+
+{% block content %}
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-gradient-light">
+    <div class="row w-100">
+        <div class="col-12 col-md-10 col-lg-8 mx-auto">
+            <!-- Progress Bar -->
+            <div class="progress mb-5">
+                <div class="progress-bar bg-primary" role="progressbar" 
+                     style="width: 100%"></div>
+            </div>
+            
+            <!-- Título da Pergunta -->
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-primary mb-3">{{ pergunta.titulo }}</h2>
+                <p class="text-muted">Escolha a opção que melhor se encaixa com você</p>
+            </div>
+            
+            <!-- Opções de Resposta -->
+            <div class="row g-4 mb-5">
+                {% for opcao in pergunta.opcoes %}
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm opcao-card cursor-pointer" 
+                         data-valor="{{ opcao.valor }}">
+                        <div class="card-body text-center p-4">
+                            <div class="display-1 mb-3">{{ opcao.icone }}</div>
+                            <h5 class="card-title text-primary">{{ opcao.texto }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="text-center mb-4">
+                <button id="btn-sem-preferencia" class="btn btn-outline-secondary btn-lg rounded-pill px-5">
+                    Não tenho preferência
+                </button>
+            </div>
+            
+            <!-- Botão Continuar -->
+            <div class="text-center">
+                <button id="btn-continuar" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold" 
+                        disabled>
+                    Continuar <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(function() {
+    let opcaoSelecionada = null;
+    
+    $('.opcao-card').on('click', function() {
+        $('.opcao-card').removeClass('selected');
+        $(this).addClass('selected');
+        opcaoSelecionada = $(this).data('valor');
+        $('#btn-continuar').prop('disabled', false);
+    });
+    
+    $('#btn-continuar').on('click', function() {
+        if (opcaoSelecionada) {
+            $.ajax({
+                url: '{% url "salvar_preferencia" %}',
+                method: 'POST',
+                headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+                contentType: 'application/json',
+                data: JSON.stringify({ chave: 'porte', valor: opcaoSelecionada }),
+                success: function() { window.location.href = '{{ pergunta.proxima }}'; },
+                error: function() { alert('Erro ao salvar preferência. Tente novamente.'); }
+            });
+        }
+    });
+    
+    $('#btn-sem-preferencia').on('click', function() {
+        opcaoSelecionada = 'sem_preferencia';
+        $('.opcao-card').removeClass('selected');
+        $('#btn-continuar').prop('disabled', false);
+    });
+});
+</script>
+{% endblock %}

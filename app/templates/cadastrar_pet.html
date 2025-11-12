@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cadastrar Pet - Totem de Adoção{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">
+                    <i class="fas fa-plus-circle me-2"></i>Cadastrar Pet
+                </h1>
+                <p class="text-muted">Ajude um pet a encontrar um lar amoroso!</p>
+            </div>
+            
+            <!-- Formulário -->
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-5">
+                    <form method="post" enctype="multipart/form-data" id="form-cadastro">
+                        {% csrf_token %}
+                        
+                        <!-- Informações Básicas -->
+                        <div class="mb-4">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-info-circle me-2"></i>Informações Básicas
+                            </h5>
+                            
+                            <div class="mb-3">
+                                <label for="nome" class="form-label fw-bold">Nome do Pet *</label>
+                                <input type="text" class="form-control form-control-lg rounded-3" 
+                                       id="nome" name="nome" required 
+                                       placeholder="Digite o nome do pet">
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="tipo" class="form-label fw-bold">Tipo *</label>
+                                    <select class="form-select form-select-lg rounded-3" id="tipo" name="tipo" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="cachorro">Cachorro</option>
+                                        <option value="gato">Gato</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="raca" class="form-label fw-bold">Raça *</label>
+                                    <input type="text" class="form-control form-control-lg rounded-3" 
+                                           id="raca" name="raca" required 
+                                           placeholder="Ex: Golden Retriever, Siamês...">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="idade" class="form-label fw-bold">Idade (anos) *</label>
+                                    <input type="number" class="form-control form-control-lg rounded-3" 
+                                           id="idade" name="idade" required min="0" max="30"
+                                           placeholder="Ex: 3">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="porte" class="form-label fw-bold">Porte *</label>
+                                    <select class="form-select form-select-lg rounded-3" id="porte" name="porte" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="pequeno">Pequeno</option>
+                                        <option value="medio">Médio</option>
+                                        <option value="grande">Grande</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Personalidade -->
+                        <div class="mb-4">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-heart me-2"></i>Personalidade
+                            </h5>
+                            <div class="mb-3">
+                                <label for="personalidade" class="form-label fw-bold">Descreva a personalidade do pet *</label>
+                                <textarea class="form-control form-control-lg rounded-3" 
+                                          id="personalidade" name="personalidade" required rows="3"
+                                          placeholder="Ex: Muito brincalhão, carinhoso, gosta de crianças..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Descrição -->
+                        <div class="mb-4">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-file-alt me-2"></i>História e Características
+                            </h5>
+                            <div class="mb-3">
+                                <label for="descricao" class="form-label fw-bold">Conte mais sobre o pet</label>
+                                <textarea class="form-control form-control-lg rounded-3" 
+                                          id="descricao" name="descricao" rows="4"
+                                          placeholder="História do pet, necessidades especiais, preferências, etc."></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Foto -->
+                        <div class="mb-4">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-camera me-2"></i>Foto do Pet
+                            </h5>
+                            <div class="mb-3">
+                                <label for="imagem" class="form-label fw-bold">Escolha uma foto</label>
+                                <input type="file" class="form-control form-control-lg rounded-3" 
+                                       id="imagem" name="imagem" accept="image/*"
+                                       onchange="previewImagem(this)">
+                            </div>
+                            <div id="imagem-preview" class="text-center">
+                                <img id="preview" class="img-fluid rounded-3">
+                            </div>
+                        </div>
+                        
+                        <!-- Botões -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">
+                                <i class="fas fa-save me-2"></i>Cadastrar Pet
+                            </button>
+                            <a href="{% url 'tela_comecar' %}" class="btn btn-outline-secondary btn-lg rounded-pill">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function previewImagem(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+            document.getElementById('imagem-preview').style.display = 'block';
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// Validação do formulário
+$('#form-cadastro').on('submit', function(e) {
+    const idade = parseInt($('#idade').val());
+    if (idade < 0 || idade > 30) {
+        e.preventDefault();
+        alert('Por favor, insira uma idade válida entre 0 e 30 anos.');
+        return false;
+    }
+    
+    // Verificar se todos os campos obrigatórios estão preenchidos
+    const camposObrigatorios = ['nome', 'tipo', 'raca', 'idade', 'porte', 'personalidade'];
+    for (let campo of camposObrigatorios) {
+        if (!$('#' + campo).val()) {
+            e.preventDefault();
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            $('#' + campo).focus();
+            return false;
+        }
+    }
+});
+</script>
+
+ 
+{% endblock %}

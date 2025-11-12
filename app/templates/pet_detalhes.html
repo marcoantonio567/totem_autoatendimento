@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ pet.nome }} - Detalhes - Totem de Adoção{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Coluna da Esquerda - Imagens -->
+        <div class="col-lg-6 mb-4">
+            <!-- Imagem Principal -->
+            <div class="card border-0 shadow-sm rounded-4 mb-3">
+                <div class="card-body p-0">
+                    {% if imagens.first %}
+                        <img src="{{ imagens.first.imagem.url }}" 
+                             class="img-fluid w-100 rounded-4 imagem-principal" 
+                             alt="{{ pet.nome }}">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center sem-foto">
+                            <div class="text-center text-muted">
+                                <i class="fas fa-paw fa-5x mb-3"></i>
+                                <h5>Sem foto disponível</h5>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Miniaturas -->
+            {% if imagens.count > 1 %}
+                <div class="row g-2">
+                    {% for imagem in imagens|slice:":4" %}
+                        {% if not forloop.first %}
+                            <div class="col-3">
+                                <img src="{{ imagem.imagem.url }}" 
+                                     class="img-fluid rounded-2 cursor-pointer miniatura" 
+                                     alt="{{ pet.nome }}" 
+                                     onclick="trocarImagemPrincipal('{{ imagem.imagem.url }}')">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- Coluna da Direita - Informações -->
+        <div class="col-lg-6">
+            <!-- Nome e Tipo -->
+            <div class="mb-4">
+                <h1 class="display-4 fw-bold text-primary mb-2">{{ pet.nome }}</h1>
+                <p class="lead text-muted mb-0">
+                    <i class="fas fa-tag me-2"></i>{{ pet.raca }} • {{ pet.get_tipo_display }}
+                </p>
+            </div>
+            
+            <!-- Cards de Informações -->
+            <div class="row g-3 mb-4">
+                <div class="col-6">
+                    <div class="card bg-primary bg-opacity-10 border-0 rounded-3">
+                        <div class="card-body text-center">
+                            <i class="fas fa-calendar-alt fa-2x text-primary mb-2"></i>
+                            <h5 class="card-title text-primary">Idade</h5>
+                            <p class="card-text fw-bold">{{ pet.idade }} ano{{ pet.idade|pluralize }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card bg-success bg-opacity-10 border-0 rounded-3">
+                        <div class="card-body text-center">
+                            <i class="fas fa-weight fa-2x text-success mb-2"></i>
+                            <h5 class="card-title text-success">Porte</h5>
+                            <p class="card-text fw-bold">{{ pet.get_porte_display }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personalidade -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-3">
+                        <i class="fas fa-heart me-2"></i>Personalidade
+                    </h5>
+                    <p class="card-text">{{ pet.personalidade }}</p>
+                </div>
+            </div>
+            
+            <!-- Descrição -->
+            {% if pet.descricao %}
+                <div class="card border-0 shadow-sm rounded-4 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-info-circle me-2"></i>Sobre {{ pet.nome }}
+                        </h5>
+                        <p class="card-text">{{ pet.descricao|linebreaks }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            
+            <!-- Status -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-3">
+                        <i class="fas fa-check-circle me-2"></i>Status
+                    </h5>
+                    {% if pet.disponivel %}
+                        <span class="badge bg-success fs-6 rounded-pill">
+                            <i class="fas fa-check me-1"></i>Disponível para Adoção
+                        </span>
+                    {% else %}
+                        <span class="badge bg-secondary fs-6 rounded-pill">
+                            <i class="fas fa-times me-1"></i>Indisponível
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Botões de Ação -->
+            <div class="d-grid gap-3">
+                {% if pet.disponivel %}
+                    <button class="btn btn-primary btn-lg rounded-pill fw-bold" onclick="mostrarInteresse()">
+                        <i class="fas fa-heart me-2"></i>Tenho Interesse na Adoção
+                    </button>
+                {% endif %}
+                <a href="{% url 'resultados' %}" class="btn btn-outline-secondary btn-lg rounded-pill">
+                    <i class="fas fa-arrow-left me-2"></i>Voltar para Lista
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Interesse -->
+<div class="modal fade" id="interesseModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-primary">
+                    <i class="fas fa-heart me-2"></i>Interesse na Adoção
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted">Parabéns pelo interesse em adotar <strong>{{ pet.nome }}</strong>!</p>
+                <p>Para dar continuidade ao processo de adoção, você será direcionado para falar com um de nossos atendentes.</p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Informações importantes:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Documentação necessária (RG, CPF, Comprovante de residência)</li>
+                        <li>Visita prévia para conhecer o pet</li>
+                        <li>Termo de adoção a ser assinado</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary rounded-pill" onclick="confirmarInteresse()">Confirmar Interesse</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function trocarImagemPrincipal(url) {
+    // Trocar imagem principal
+    document.querySelector('.card-img-top').src = url;
+}
+
+function mostrarInteresse() {
+    const modal = new bootstrap.Modal(document.getElementById('interesseModal'));
+    modal.show();
+}
+
+function confirmarInteresse() {
+    alert('Obrigado pelo interesse! Um atendente será acionado para ajudá-lo com a adoção de {{ pet.nome }}.\n\nPor favor, aguarde um momento.');
+    const modal = bootstrap.Modal.getInstance(document.getElementById('interesseModal'));
+    modal.hide();
+}
+</script>
+
+ 
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Totem de Adoção - Encontre seu Pet Ideal{% endblock %}
+
+{% block content %}
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-gradient-primary">
+    <div class="row w-100">
+        <div class="col-12 text-center">
+            <!-- Logo e Título -->
+            <div class="mb-5">
+                <img src="{% static 'images/MaryCats_Branco.png' %}" alt="Logo" class="img-fluid mb-4 logo-hero">
+                <h1 class="display-3 fw-bold text-white mb-3">Encontre seu Pet Ideal</h1>
+                <p class="lead text-white-50 mb-5">Responda algumas perguntas e descubra o pet perfeito para você!</p>
+            </div>
+            
+            <!-- Cards de Destaque -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-3 mb-4">
+                    <div class="card bg-white bg-opacity-10 border-0 rounded-4 p-4">
+                        <div class="card-body text-white">
+                            <div class="display-4 mb-3">🐕</div>
+                            <h5 class="card-title">Cachorros</h5>
+                            <p class="card-text small">Amigos leais e cheios de energia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card bg-white bg-opacity-10 border-0 rounded-4 p-4">
+                        <div class="card-body text-white">
+                            <div class="display-4 mb-3">🐈</div>
+                            <h5 class="card-title">Gatos</h5>
+                            <p class="card-text small">Independentes e carinhosos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card bg-white bg-opacity-10 border-0 rounded-4 p-4">
+                        <div class="card-body text-white">
+                            <div class="display-4 mb-3">❤️</div>
+                            <h5 class="card-title">Adoção Consciente</h5>
+                            <p class="card-text small">Encontre seu companheiro ideal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botão Principal -->
+            <div class="mb-4">
+                <a href="{% url 'pergunta_dupla' step=1 %}" class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold text-primary shadow-lg">
+                    <i class="fas fa-play me-2"></i>
+                    Começar Agora
+                </a>
+            </div>
+            
+            <!-- Link para Cadastro -->
+            <div class="text-center">
+                <a href="{% url 'cadastrar_pet' %}" class="text-white-50 text-decoration-none small">
+                    <i class="fas fa-plus-circle me-1"></i>
+                    Cadastrar um pet para adoção
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

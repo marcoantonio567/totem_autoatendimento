@@ -1,7 +1,28 @@
 {% load static %}
-
-{% block header %}
-    <header>
-        <img src="{% static 'images/MaryCats.png' %}" alt="Logo">
-    </header>
-{% endblock %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="{% url 'tela_comecar' %}">
+            <img src="{% static 'images/MaryCats.png' %}" alt="Logo" class="me-2 logo">
+            Totem Pet
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="{% url 'tela_comecar' %}">
+                        <i class="fas fa-home me-1"></i>Início
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium" href="{% url 'cadastrar_pet' %}">
+                        <i class="fas fa-plus-circle me-1"></i>Cadastrar Pet
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
