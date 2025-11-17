@@ -10,6 +10,7 @@
     --light-color: #f8f9fa;
     --dark-color: #343a40;
     --marycats-dark-pink: #b11c6c;
+    --marycats-: #b11c6c;
 }
 
 /* Fontes */
@@ -45,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Botões */
 .btn {
-    border-radius: 2rem;
+    border-radius: 1rem !important;
     font-weight: 600;
     padding: 0.75rem 2rem;
     transition: all 0.3s ease;
@@ -103,7 +104,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Navbar */
 .navbar {
     backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .navbar-brand {
@@ -219,7 +219,7 @@ footer {
     }
     
     .btn {
-        min-height: 60px;
+        min-height: 160px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -269,7 +269,7 @@ footer {
 }
 
 .logo {
-    height: 40px;
+    height: 200px;
 }
 
 .cursor-pointer {
