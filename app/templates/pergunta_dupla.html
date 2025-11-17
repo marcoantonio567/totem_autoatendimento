@@ -34,7 +34,7 @@
                 {% endfor %}
             </div>
             <div class="text-center mb-4">
-                <button id="btn-sem-preferencia" class="btn btn-outline-secondary btn-lg rounded-pill px-5">
+                <button id="btn-sem-preferencia" type="button" aria-pressed="false" class="btn btn-outline-secondary btn-lg rounded-pill px-5">
                     Não tenho preferência
                 </button>
             </div>
@@ -62,12 +62,14 @@ $(function() {
         $(this).addClass('selected');
         opcaoSelecionada = $(this).data('valor');
         $('#btn-continuar').prop('disabled', false);
+        $('#btn-sem-preferencia').removeClass('active').attr('aria-pressed', 'false');
     });
     
     $('#btn-sem-preferencia').on('click', function() {
         opcaoSelecionada = 'sem_preferencia';
         $('.opcao-card').removeClass('selected');
         $('#btn-continuar').prop('disabled', false);
+        $(this).addClass('active').attr('aria-pressed', 'true').focus();
     });
     
     $('#btn-continuar').on('click', function() {
