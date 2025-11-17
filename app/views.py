@@ -77,8 +77,8 @@ def pergunta_dupla(request, step=1):
         2: {
             'titulo': 'Você prefere macho ou fêmea?',
             'opcoes': [
-                {'valor': 'macho', 'texto': 'Macho', 'icone': '🐾'},
-                {'valor': 'femea', 'texto': 'Fêmea', 'icone': '🐾'}
+                {'valor': 'macho', 'texto': 'Macho', 'icone': '♂'},
+                {'valor': 'femea', 'texto': 'Fêmea', 'icone': '♀'}
             ],
             'proxima': '/pergunta/dupla/3/'
         },
@@ -107,9 +107,9 @@ def pergunta_tripla(request, step=2):
         4: {
             'titulo': 'Qual porte você prefere?',
             'opcoes': [
-                {'valor': 'pequeno', 'texto': 'Pequeno', 'icone': '🐭'},
-                {'valor': 'medio', 'texto': 'Médio', 'icone': '🐕'},
-                {'valor': 'grande', 'texto': 'Grande', 'icone': '🐺'}
+                {'valor': 'pequeno', 'texto': 'Pequeno', 'icone': 'images/dog_pequeno.jpg'},
+                {'valor': 'medio', 'texto': 'Médio', 'icone': 'images/dog_medio.png'},
+                {'valor': 'grande', 'texto': 'Grande', 'icone': 'images/dog_grande.png'}
             ],
             'proxima': '/resultados/'
         }
