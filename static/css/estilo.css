@@ -9,6 +9,7 @@
     --danger-color: #dc3545;
     --light-color: #f8f9fa;
     --dark-color: #343a40;
+    --marycats-dark-pink: #b11c6c;
 }
 
 /* Fontes */
@@ -22,12 +23,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Gradients */
-.bg-gradient-primary {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+.bg-dark-pink {
+    background: var(--marycats-dark-pink);
 }
 
 .bg-gradient-light {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: var(--marycats-dark-pink);
 }
 
 /* Cards */
@@ -57,11 +58,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: var(--marycats-dark-pink);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    background: #9a1759;
 }
 
 /* Formulários */
@@ -112,7 +113,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+    bottom: 0;
+    width: 100%;
+    z-index: 0;
+    padding: 0 !important;
+}
+
+.footer-bg-compensation{
+    transform: translate(0, -4px);
 }
 
 /* Cards de Seleção */
@@ -301,7 +309,9 @@ footer {
 }
 
 .logo-footer {
-    height: 30px;
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .btn-light {
