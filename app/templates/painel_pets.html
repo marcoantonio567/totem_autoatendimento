@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Painel de Pets - Totem de Adoção{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-12 d-flex align-items-center justify-content-between">
+            <h1 class="h3 fw-bold text-primary mb-0"><i class="fas fa-sliders-h me-2"></i>Painel de Pets</h1>
+            <a href="{% url 'cadastrar_pet' %}" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Novo Pet</a>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Buscar por nome...">
+                </div>
+                <div class="col-md-4">
+                    <select name="disponivel" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="true" {% if filtro_disponivel == 'true' %}selected{% endif %}>Disponíveis</option>
+                        <option value="false" {% if filtro_disponivel == 'false' %}selected{% endif %}>Indisponíveis</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-grid">
+                    <button class="btn btn-outline-primary"><i class="fas fa-search me-2"></i>Filtrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Raça</th>
+                            <th>Idade</th>
+                            <th>Porte</th>
+                            <th>Status</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pet in pets %}
+                        <tr>
+                            <td style="width:80px">
+                                {% if pet.imagens.first %}
+                                    <img src="{{ pet.imagens.first.imagem.url }}" class="img-thumbnail" style="width:64px;height:64px;object-fit:cover">
+                                {% else %}
+                                    <div class="text-muted"><i class="fas fa-paw"></i></div>
+                                {% endif %}
+                            </td>
+                            <td class="fw-bold"><a href="{% url 'pet_detalhes' pet.id %}" class="text-decoration-none">{{ pet.nome }}</a></td>
+                            <td>{{ pet.get_tipo_display }}</td>
+                            <td>{{ pet.raca }}</td>
+                            <td>{{ pet.idade }}</td>
+                            <td>{{ pet.get_porte_display }}</td>
+                            <td>
+                                {% if pet.disponivel %}
+                                    <span class="badge bg-success rounded-pill">Disponível</span>
+                                {% else %}
+                                    <span class="badge bg-secondary rounded-pill">Indisponível</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end" style="width: 180px;">
+                                <div class="d-flex justify-content-end align-items-center gap-2 flex-nowrap">
+                                    <a href="{% url 'editar_pet' pet.id %}" class="btn btn-sm btn-outline-primary rounded-pill" aria-label="Editar"><i class="fas fa-edit"></i></a>
+                                    <a href="{% url 'alternar_disponibilidade_pet' pet.id %}" class="btn btn-sm btn-outline-warning rounded-pill" aria-label="Alternar disponibilidade"><i class="fas fa-toggle-on"></i></a>
+                                    <form action="{% url 'excluir_pet' pet.id %}" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir {{ pet.nome }}?')">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-outline-danger rounded-pill" aria-label="Excluir"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">Nenhum pet encontrado</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

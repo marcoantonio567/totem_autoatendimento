@@ -205,3 +205,51 @@ def cadastrar_pet(request):
             messages.error(request, f'Erro ao cadastrar pet: {str(e)}')
     
     return render(request, 'cadastrar_pet.html', {})
+
+def painel_pets(request):
+    q = request.GET.get('q', '').strip()
+    filtro_disponivel = request.GET.get('disponivel')
+    pets = Pet.objects.all()
+    if q:
+        pets = pets.filter(nome__icontains=q)
+    if filtro_disponivel in ['true', 'false']:
+        pets = pets.filter(disponivel=(filtro_disponivel == 'true'))
+    pets = pets.order_by('nome')
+    return render(request, 'painel_pets.html', {'pets': pets, 'q': q, 'filtro_disponivel': filtro_disponivel})
+
+def editar_pet(request, pet_id):
+    pet = get_object_or_404(Pet, id=pet_id)
+    if request.method == 'POST':
+        try:
+            pet.nome = request.POST.get('nome')
+            pet.tipo = request.POST.get('tipo')
+            pet.raca = request.POST.get('raca')
+            pet.idade = int(request.POST.get('idade'))
+            pet.porte = request.POST.get('porte')
+            pet.personalidade = request.POST.get('personalidade')
+            pet.descricao = request.POST.get('descricao', '')
+            pet.save()
+            if request.FILES.get('imagem'):
+                PetImagem.objects.create(pet=pet, imagem=request.FILES.get('imagem'), principal=not pet.imagens.exists())
+            messages.success(request, 'Pet atualizado com sucesso!')
+            return redirect('painel_pets')
+        except Exception as e:
+            messages.error(request, f'Erro ao atualizar pet: {str(e)}')
+    imagens = pet.imagens.all()
+    return render(request, 'editar_pet.html', {'pet': pet, 'imagens': imagens})
+
+def excluir_pet(request, pet_id):
+    pet = get_object_or_404(Pet, id=pet_id)
+    if request.method == 'POST':
+        nome = pet.nome
+        pet.delete()
+        messages.success(request, f'Pet "{nome}" excluído com sucesso!')
+        return redirect('painel_pets')
+    return redirect('painel_pets')
+
+def alternar_disponibilidade_pet(request, pet_id):
+    pet = get_object_or_404(Pet, id=pet_id)
+    pet.disponivel = not pet.disponivel
+    pet.save()
+    messages.success(request, 'Disponibilidade atualizada!')
+    return redirect('painel_pets')

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Pet - Totem de Adoção{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="text-center mb-5">
+                <h1 class="display-6 fw-bold text-primary mb-2"><i class="fas fa-edit me-2"></i>Editar Pet</h1>
+                <p class="text-muted">Atualize as informações do pet selecionado</p>
+            </div>
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-5">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="nome">Nome *</label>
+                            <input class="form-control form-control-lg rounded-3" id="nome" name="nome" value="{{ pet.nome }}" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold" for="tipo">Tipo *</label>
+                                <select class="form-select form-select-lg rounded-3" id="tipo" name="tipo" required>
+                                    <option value="cachorro" {% if pet.tipo == 'cachorro' %}selected{% endif %}>Cachorro</option>
+                                    <option value="gato" {% if pet.tipo == 'gato' %}selected{% endif %}>Gato</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold" for="raca">Raça *</label>
+                                <input class="form-control form-control-lg rounded-3" id="raca" name="raca" value="{{ pet.raca }}" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold" for="idade">Idade (anos) *</label>
+                                <input type="number" min="0" max="30" class="form-control form-control-lg rounded-3" id="idade" name="idade" value="{{ pet.idade }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold" for="porte">Porte *</label>
+                                <select class="form-select form-select-lg rounded-3" id="porte" name="porte" required>
+                                    <option value="pequeno" {% if pet.porte == 'pequeno' %}selected{% endif %}>Pequeno</option>
+                                    <option value="medio" {% if pet.porte == 'medio' %}selected{% endif %}>Médio</option>
+                                    <option value="grande" {% if pet.porte == 'grande' %}selected{% endif %}>Grande</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="personalidade">Personalidade *</label>
+                            <textarea class="form-control form-control-lg rounded-3" id="personalidade" name="personalidade" rows="3" required>{{ pet.personalidade }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="descricao">Descrição</label>
+                            <textarea class="form-control form-control-lg rounded-3" id="descricao" name="descricao" rows="4">{{ pet.descricao }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="imagem">Adicionar nova imagem</label>
+                            <input type="file" class="form-control form-control-lg rounded-3" id="imagem" name="imagem" accept="image/*">
+                        </div>
+                        <div class="mb-4">
+                            <small class="text-muted d-block mb-2">Imagens existentes:</small>
+                            <div class="d-flex flex-wrap gap-2">
+                                {% for imagem in imagens %}
+                                    <img src="{{ imagem.imagem.url }}" class="rounded" style="width:80px;height:80px;object-fit:cover">
+                                {% empty %}
+                                    <span class="text-muted">Sem imagens</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="d-grid gap-3">
+                            <button class="btn btn-primary btn-lg rounded-pill fw-bold" type="submit"><i class="fas fa-save me-2"></i>Salvar alterações</button>
+                            <a href="{% url 'painel_pets' %}" class="btn btn-outline-secondary btn-lg rounded-pill"><i class="fas fa-arrow-left me-2"></i>Voltar ao Painel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
