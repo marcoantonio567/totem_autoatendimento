@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Core Admin - Cadastrar Pet{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h3 fw-bold text-primary mb-0">Cadastrar Pet</h1>
+                    <p class="text-muted">Adicione um novo pet para adoção</p>
+                </div>
+                <div>
+                    <a href="{% url 'core_dashboard' %}" class="btn btn-outline-secondary rounded-pill">
+                        <i class="fas fa-arrow-left me-2"></i>Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nome" class="form-label fw-bold">Nome do Pet *</label>
+                                <input type="text" class="form-control rounded-pill" id="nome" name="nome" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="tipo" class="form-label fw-bold">Tipo *</label>
+                                <select class="form-select rounded-pill" id="tipo" name="tipo" required>
+                                    <option value="">Selecione o tipo</option>
+                                    <option value="cachorro">Cachorro</option>
+                                    <option value="gato">Gato</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="raca" class="form-label fw-bold">Raça *</label>
+                                <input type="text" class="form-control rounded-pill" id="raca" name="raca" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="idade" class="form-label fw-bold">Idade (anos) *</label>
+                                <input type="number" class="form-control rounded-pill" id="idade" name="idade" min="0" max="30" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="porte" class="form-label fw-bold">Porte *</label>
+                            <select class="form-select rounded-pill" id="porte" name="porte" required>
+                                <option value="">Selecione o porte</option>
+                                <option value="pequeno">Pequeno</option>
+                                <option value="medio">Médio</option>
+                                <option value="grande">Grande</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="personalidade" class="form-label fw-bold">Personalidade *</label>
+                            <textarea class="form-control rounded-3" id="personalidade" name="personalidade" rows="3" required placeholder="Descreva a personalidade do pet..."></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descricao" class="form-label fw-bold">Descrição</label>
+                            <textarea class="form-control rounded-3" id="descricao" name="descricao" rows="4" placeholder="Informações adicionais sobre o pet..."></textarea>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="imagem" class="form-label fw-bold">Imagem do Pet</label>
+                            <input type="file" class="form-control rounded-pill" id="imagem" name="imagem" accept="image/*">
+                            <div class="form-text">Formatos aceitos: JPG, PNG, GIF</div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">
+                                <i class="fas fa-save me-2"></i>Cadastrar Pet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

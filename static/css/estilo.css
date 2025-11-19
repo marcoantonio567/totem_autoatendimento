@@ -1,0 +1,523 @@
+/* Estilos Customizados para o Totem de Adoção Pet */
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --marycats-dark-pink: #b11c6c;
+    --marycats-yellow: #fdd12c;
+}
+
+/* Fontes */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
+.question-title{
+    color: var(--marycats-yellow) !important;
+}
+
+/* Gradients */
+.bg-dark-pink {
+    background: var(--marycats-dark-pink);
+}
+
+.bg-gradient-light {
+    background: var(--marycats-dark-pink);
+}
+
+/* Cards */
+.card {
+    border: none;
+    transition: all 0.3s ease;
+    border-radius: 1rem !important;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+/* Botões */
+.btn {
+    border-radius: 1rem !important;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+    background: var(--marycats-dark-pink);
+}
+
+.btn-primary:hover {
+    background: #9a1759;
+}
+
+/* Formulários */
+.form-control, .form-select {
+    border-radius: 1rem;
+    border: 2px solid #e9ecef;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-control-lg, .form-select-lg {
+    font-size: 1.1rem;
+}
+
+/* Badges */
+.badge {
+    border-radius: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+}
+
+/* Progress Bar */
+.progress {
+    border-radius: 1rem;
+    height: 8px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 1rem;
+}
+
+/* Navbar */
+.navbar {
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    z-index: 0;
+    padding: 0 !important;
+}
+/* Portrait Display Layout (1080x1920) */
+html, body {
+    height: 100%;
+}
+
+/* Custom min-height class accounting for header and footer */
+.min-vh-100 {
+    min-height: calc(100vh - 420px) !important; /* 100vh - 216px header - 204px footer */
+}
+
+/* Alternative class for full viewport height */
+.min-vh-100-full {
+    min-height: 100vh !important;
+}
+
+/* Ensure footer sticks to bottom for all pages */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+}
+
+/* For portrait displays specifically */
+@media (orientation: portrait) and (min-height: 1900px) {
+    .container-fluid {
+        min-height: calc(100vh - 420px); /* Account for header and footer */
+    }
+    
+    footer {
+        position: sticky;
+        bottom: 0;
+        margin-top: auto;
+    }
+}
+
+/* Ensure proper spacing for content */
+.main-content {
+    min-height: calc(100vh - 420px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cards de Seleção */
+.opcao-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.opcao-card:hover {
+    border-color: var(--marycats-yellow);
+    transform: scale(1.02);
+}
+
+.opcao-card.selected {
+    background-color: var(--marycats-yellow) !important;
+    border-color: var(--marycats-yellow);
+    transform: scale(1.02);
+}
+
+.opcao-card.selected .text-marycats-yellow {
+    color: var(--marycats-dark-pink) !important;
+}
+
+.opcao-card.selected i {
+    color: var(--marycats-dark-pink) !important;
+}
+
+.opcao-card.selected h5 {
+    color: var(--marycats-dark-pink) !important;
+}
+
+/* Imagens */
+.card-img-top {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Utility Classes */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+/* MaryCats Color Classes */
+.text-marycats-yellow {
+    color: var(--marycats-yellow) !important;
+}
+
+.text-marycats-dark-pink {
+    color: var(--marycats-dark-pink) !important;
+}
+
+.bg-marycats-yellow {
+    background-color: var(--marycats-yellow) !important;
+}
+
+.bg-marycats-dark-pink {
+    background-color: var(--marycats-dark-pink) !important;
+}
+
+.btn-marycats-dark-pink {
+    background-color: var(--marycats-dark-pink);
+    border-color: var(--marycats-dark-pink);
+    color: white;
+}
+
+.btn-marycats-dark-pink:hover {
+    background-color: #9a1759;
+    border-color: #9a1759;
+    color: white;
+}
+
+.btn-outline-marycats-dark-pink {
+    color: var(--marycats-dark-pink);
+    border-color: var(--marycats-dark-pink);
+    background-color: transparent;
+}
+
+.btn-outline-marycats-dark-pink:hover {
+    background-color: var(--marycats-dark-pink);
+    border-color: var(--marycats-dark-pink);
+    color: white;
+}
+
+/* New button styles for questions */
+.btn-outline-marycats-yellow {
+    color: var(--marycats-yellow);
+    border-color: var(--marycats-yellow);
+    background-color: transparent;
+}
+
+.btn-outline-marycats-yellow:hover {
+    background-color: var(--marycats-yellow);
+    border-color: var(--marycats-yellow);
+    color: var(--marycats-dark-pink);
+}
+
+.border-marycats-yellow {
+    border-color: var(--marycats-yellow) !important;
+}
+
+/* Continuar button states */
+.btn-continuar-disabled {
+    background-color: var(--marycats-dark-pink) !important;
+    border: 3px solid var(--marycats-yellow) !important;
+    color: var(--marycats-yellow) !important;
+}
+
+.btn-continuar-enabled {
+    background-color: var(--marycats-yellow);
+    border: 3px solid var(--marycats-yellow);
+    color: var(--marycats-dark-pink);
+}
+
+.btn-continuar-disabled:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-continuar-enabled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Responsividade para Totem */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .display-1 {
+        font-size: 5rem;
+    }
+    
+    .display-2 {
+        font-size: 4.5rem;
+    }
+    
+    .display-3 {
+        font-size: 4rem;
+    }
+    
+    .display-4 {
+        font-size: 3.5rem;
+    }
+    
+    .btn-lg {
+        padding: 1rem 3rem;
+        font-size: 1.25rem;
+    }
+    
+    .form-control-lg, .form-select-lg {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+}
+
+/* Portrait Display Optimization (1080x1920) */
+@media (min-width: 1080px) and (orientation: portrait) {
+    .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    .display-3 {
+        font-size: 3.5rem;
+    }
+    
+    .display-4 {
+        font-size: 3rem;
+    }
+    
+    .btn-lg {
+        padding: 1.2rem 3rem;
+        font-size: 1.3rem;
+        min-height: 80px;
+    }
+    
+    .card {
+        margin-bottom: 2rem;
+    }
+    
+    .card-body {
+        padding: 2rem;
+    }
+    
+    /* Dashboard specific styling */
+    .dashboard-stats .card {
+        min-height: 180px;
+    }
+    
+    .dashboard-stats .fa-3x {
+        font-size: 4rem !important;
+    }
+    
+    .dashboard-actions .btn {
+        min-height: 100px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Touch-friendly para telas de totem */
+@media (min-width: 768px) {
+    .opcao-card {
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn {
+        min-height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .form-control, .form-select {
+        min-height: 60px;
+    }
+}
+
+/* Miniaturas de imagens */
+.miniatura {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
+
+.miniatura:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+/* Loading Animation */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+.logo {
+    height: 200px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+#btn-continuar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#imagem-preview {
+    display: none;
+}
+
+#preview {
+    max-height: 200px;
+}
+
+.card-img-top-container {
+    height: 250px;
+    overflow: hidden;
+}
+
+.imagem-principal {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.sem-foto {
+    height: 400px;
+    background-color: #f8f9fa;
+}
+
+.logo-hero {
+    max-height: 120px;
+}
+
+.logo-footer {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.btn-light {
+    transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2) !important;
+}
+
+.badge {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    object-fit: cover;
+}
+
+.miniatura {
+    height: 80px;
+    object-fit: cover;
+}

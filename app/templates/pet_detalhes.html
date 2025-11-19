@@ -15,6 +15,10 @@
                         <img src="{{ imagens.first.imagem.url }}" 
                              class="img-fluid w-100 rounded-4 imagem-principal" 
                              alt="{{ pet.nome }}">
+                    {% elif static_image_path %}
+                        <img src="{% static static_image_path %}" 
+                             class="img-fluid w-100 rounded-4 imagem-principal" 
+                             alt="{{ pet.nome }}">
                     {% else %}
                         <div class="d-flex align-items-center justify-content-center sem-foto">
                             <div class="text-center text-muted">
@@ -125,6 +129,20 @@
                 <a href="{% url 'resultados' %}" class="btn btn-outline-secondary btn-lg rounded-pill">
                     <i class="fas fa-arrow-left me-2"></i>Voltar para Lista
                 </a>
+            </div>
+            
+            <!-- QR Code -->
+            <div class="card border-0 shadow-sm rounded-4 mt-4">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-primary mb-3">
+                        <i class="fas fa-qrcode me-2"></i>QR Code - Formulário de Adoção
+                    </h6>
+                    <img src="{% static 'images/Forms_qrcode.png' %}" 
+                         class="img-fluid" 
+                         alt="QR Code para formulário de adoção"
+                         style="max-width: 150px;">
+                    <p class="text-muted small mt-2 mb-0">Escaneie para acessar o formulário</p>
+                </div>
             </div>
         </div>
     </div>

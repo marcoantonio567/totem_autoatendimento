@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Core Admin - Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 bg-marycats-dark-pink min-vh-100">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h3 fw-bold text-white mb-0">Core Admin Dashboard</h1>
+                    <p class="text-white-50">Sistema administrativo de pets</p>
+                </div>
+                <div>
+                    <a href="{% url 'core_logout' %}" class="btn btn-outline-light rounded-pill">
+                        <i class="fas fa-sign-out-alt me-2"></i>Sair
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- Stats Cards -->
+    <div class="row mb-4 dashboard-stats">
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4 bg-marycats-yellow">
+                <div class="card-body text-center">
+                    <i class="fas fa-paw fa-3x text-marycats-dark-pink mb-3"></i>
+                    <h4 class="fw-bold text-marycats-dark-pink">{{ total_pets }}</h4>
+                    <p class="text-marycats-dark-pink mb-0">Total de Pets</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4 bg-marycats-yellow">
+                <div class="card-body text-center">
+                    <i class="fas fa-check-circle fa-3x text-marycats-dark-pink mb-3"></i>
+                    <h4 class="fw-bold text-marycats-dark-pink">{{ pets_disponiveis }}</h4>
+                    <p class="text-marycats-dark-pink mb-0">Disponíveis</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4 bg-marycats-yellow">
+                <div class="card-body text-center">
+                    <i class="fas fa-dog fa-3x text-marycats-dark-pink mb-3"></i>
+                    <h4 class="fw-bold text-marycats-dark-pink">{{ total_cachorros }}</h4>
+                    <p class="text-marycats-dark-pink mb-0">Cachorros</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4 bg-marycats-yellow">
+                <div class="card-body text-center">
+                    <i class="fas fa-cat fa-3x text-marycats-dark-pink mb-3"></i>
+                    <h4 class="fw-bold text-marycats-dark-pink">{{ total_gatos }}</h4>
+                    <p class="text-marycats-dark-pink mb-0">Gatos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="row mb-4 dashboard-actions">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-4 bg-marycats-yellow">
+                <div class="card-body">
+                    <h5 class="card-title text-marycats-dark-pink mb-3">
+                        <i class="fas fa-tools me-2"></i>Ações Rápidas
+                    </h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a href="{% url 'core_cadastrar_pet' %}" class="btn btn-marycats-dark-pink btn-lg w-100 rounded-pill">
+                                <i class="fas fa-plus-circle me-2"></i>Cadastrar Pet
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{% url 'resultados' %}" class="btn btn-marycats-dark-pink btn-lg w-100 rounded-pill">
+                                <i class="fas fa-list me-2"></i>Ver Pets
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{% url 'tela_comecar' %}" class="btn btn-marycats-dark-pink btn-lg w-100 rounded-pill">
+                                <i class="fas fa-home me-2"></i>Ver Totem
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -34,6 +34,10 @@
                                 <img src="{{ pet.imagens.first.imagem.url }}" 
                                      class="card-img-top w-100 h-100" 
                                      alt="{{ pet.nome }}">
+                            {% elif item.static_image_path %}
+                                <img src="{% static item.static_image_path %}" 
+                                     class="card-img-top w-100 h-100" 
+                                     alt="{{ pet.nome }}">
                             {% else %}
                                 <div class="d-flex align-items-center justify-content-center h-100 bg-light">
                                     <div class="text-center text-muted">
