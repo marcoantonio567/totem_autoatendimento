@@ -63,7 +63,12 @@ def footer(request):
 
 def tela_comecar(request):
     """Tela inicial com botão para começar o fluxo"""
-    return render(request, 'comecar.html', {})
+    # Get available pets for carousel
+    pets = Pet.objects.filter(disponivel=True)[:6]  # Limit to 6 pets for carousel
+    
+    return render(request, 'comecar.html', {
+        'pets': pets
+    })
 
 def pergunta_dupla(request, step=1):
     """Perguntas com duas opções"""

@@ -4,14 +4,14 @@
 {% block title %}Core Admin - Login{% endblock %}
 
 {% block content %}
-<div class="container-fluid min-vh-85 d-flex align-items-center justify-content-center bg-dark-pink">
+<div class="container-fluid d-flex align-items-center justify-content-center bg-dark-pink" style="min-height: 89.5vh; overflow: hidden;">
     <div class="row w-100 justify-content-center">
-        <div class="col-md-4">
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-body p-5">
+        <div class="col-5">
+            <div class="card shadow-lg border-0 rounded-4 bg-white">
+                <div class="card-body p-4">
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold text-primary mb-3">Core Admin</h2>
-                        <p class="text-muted">Acesso administrativo</p>
+                        <h3 class="fw-bold text-marycats-dark-pink mb-2">Core Admin</h3>
+                        <p class="text-muted small">Acesso administrativo</p>
                     </div>
                     
                     {% if messages %}
@@ -26,21 +26,21 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="username" class="form-label">Usuário</label>
-                            <input type="text" class="form-control rounded-pill" id="username" name="username" required>
+                            <label for="username" class="form-label text-dark fw-semibold">Usuário</label>
+                            <input type="text" class="form-control rounded-3" id="username" name="username" required>
                         </div>
                         <div class="mb-4">
-                            <label for="password" class="form-label">Senha</label>
-                            <input type="password" class="form-control rounded-pill" id="password" name="password" required>
+                            <label for="password" class="form-label text-dark fw-semibold">Senha</label>
+                            <input type="password" class="form-control rounded-3" id="password" name="password" required>
                         </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn bg-marycats-dark-pink text-white btn-lg rounded-3 fw-bold border-0">
                                 <i class="fas fa-sign-in-alt me-2"></i>Entrar
                             </button>
                         </div>
                     </form>
                     
-                    <div class="text-center mt-4">
+                    <div class="text-center">
                         <a href="{% url 'tela_comecar' %}" class="text-muted text-decoration-none small">
                             <i class="fas fa-arrow-left me-1"></i>Voltar ao totem
                         </a>

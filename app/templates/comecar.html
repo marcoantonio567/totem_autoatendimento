@@ -3,54 +3,68 @@
 
 {% block title %}Totem de Adoção - Encontre seu Pet Ideal{% endblock %}
 
+{% block main_class %}p-0 no-scroll{% endblock %}
+
 {% block content %}
-<div class="container-fluid min-vh-85 d-flex align-items-center justify-content-center bg-dark-pink">
+<!-- Full-width Carousel starting from top -->
+{% if pets %}
+<div id="petCarousel" class="carousel slide carousel-full-height" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-indicators">
+        {% for pet in pets %}
+        <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="{{ forloop.counter0 }}" 
+                {% if forloop.first %}class="active"{% endif %} aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+    </div>
+    <div class="carousel-inner">
+        {% for pet in pets %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <a href="{% url 'pet_detalhes' pet_id=pet.id %}" class="carousel-pet-link">
+                <div class="position-relative carousel-image-container">
+                    <img src="{{ pet.imagens.first.imagem.url }}" class="d-block w-100 carousel-image" alt="{{ pet.nome }}">
+                    <!-- Overlay gradient for text readability -->
+                    <div class="carousel-overlay"></div>
+
+                    <!-- Pet caption -->
+                    <div class="carousel-caption d-flex flex-column justify-content-end h-100 pb-5">
+                        <div class="bg-dark bg-opacity-75 rounded-3 p-3 mx-auto" style="max-width: 300px;">
+                            <h5 class="text-white mb-1 fw-bold">{{ pet.nome }}</h5>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#petCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#petCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endif %}
+
+<!-- Content Section -->
+<div class="container-fluid content-section bg-dark-pink d-flex pt-5 justify-content-center">
     <div class="row w-100">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center justify-content-center">
             <!-- Logo e Título -->
-            <div class="mb-5">
-                <h1 class="display-3 fw-bold text-white mb-3">Encontre seu Pet Ideal</h1>
-                <p class="lead text-white-50 mb-5">Responda algumas perguntas e descubra o pet perfeito para você!</p>
-            </div>
-            
-            <!-- Cards de Destaque -->
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-3 mb-4">
-                    <div class="card bg-white bg-opacity-10 border-0 rounded-4 p-4">
-                        <div class="card-body text-white">
-                            <div class="display-4 mb-3">🐕</div>
-                            <h5 class="card-title">Cachorros</h5>
-                            <p class="card-text small">Amigos leais e cheios de energia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card bg-white bg-opacity-10 border-0 rounded-4 p-4">
-                        <div class="card-body text-white">
-                            <div class="display-4 mb-3">🐈</div>
-                            <h5 class="card-title">Gatos</h5>
-                            <p class="card-text small">Independentes e carinhosos</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card bg-white bg-opacity-10 border-0 rounded-4 p-4">
-                        <div class="card-body text-white">
-                            <div class="display-4 mb-3">❤️</div>
-                            <h5 class="card-title">Adoção Consciente</h5>
-                            <p class="card-text small">Encontre seu companheiro ideal</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Botão Principal -->
             <div class="mb-4">
-                <a href="{% url 'pergunta_dupla' step=1 %}" class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold text-primary shadow-lg">
+                <h1 class="display-4 fw-bold text-white mb-2">Encontre seu Pet</h1>
+                <p class="lead text-white-50 mb-3">Responda algumas perguntas e descubra o pet perfeito para você!</p>
+            </div>
+
+            <div class="pt-5">
+                <a href="{% url 'pergunta_dupla' step=1 %}" class="btn mb-4 btn-light btn-lg rounded-pill px-4 py-2 fw-bold text-marycats-dark-pink shadow-lg">
                     <i class="fas fa-play me-2"></i>
                     Começar Agora
                 </a>
             </div>
+            </div>
+            <!-- Botão Principal -->
         </div>
     </div>
 </div>

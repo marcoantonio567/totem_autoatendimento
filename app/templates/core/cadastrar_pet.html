@@ -4,24 +4,24 @@
 {% block title %}Core Admin - Cadastrar Pet{% endblock %}
 
 {% block content %}
-<div class="container py-4">
-    <!-- Header -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="h3 fw-bold text-primary mb-0">Cadastrar Pet</h1>
-                    <p class="text-muted">Adicione um novo pet para adoção</p>
-                </div>
-                <div>
-                    <a href="{% url 'core_dashboard' %}" class="btn btn-outline-secondary rounded-pill">
-                        <i class="fas fa-arrow-left me-2"></i>Voltar
-                    </a>
+<div class="container-fluid min-vh-100 bg-dark-pink py-4">
+    <div class="container">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-end">
+                    <div class="text-end">
+                        <a href="{% url 'core_dashboard' %}" class="text-decoration-none">
+                            <h1 class="h3 fw-bold text-white mb-2">Cadastrar Pet</h1>
+                            <div class="btn btn-outline-marycats-yellow bg-marycats-dark-pink text-marycats-yellow rounded-pill">
+                                <i class="fas fa-arrow-left me-2"></i>Voltar
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+        
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -33,18 +33,18 @@
     
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm rounded-4">
+            <div class="card border-0 shadow-lg rounded-4 bg-white bg-opacity-10">
                 <div class="card-body p-4">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="nome" class="form-label fw-bold">Nome do Pet *</label>
+                                <label for="nome" class="form-label fw-bold text-white">Nome do Pet *</label>
                                 <input type="text" class="form-control rounded-pill" id="nome" name="nome" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="tipo" class="form-label fw-bold">Tipo *</label>
+                                <label for="tipo" class="form-label fw-bold text-white">Tipo *</label>
                                 <select class="form-select rounded-pill" id="tipo" name="tipo" required>
                                     <option value="">Selecione o tipo</option>
                                     <option value="cachorro">Cachorro</option>
@@ -55,17 +55,17 @@
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="raca" class="form-label fw-bold">Raça *</label>
+                                <label for="raca" class="form-label fw-bold text-white">Raça *</label>
                                 <input type="text" class="form-control rounded-pill" id="raca" name="raca" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="idade" class="form-label fw-bold">Idade (anos) *</label>
+                                <label for="idade" class="form-label fw-bold text-white">Idade (anos) *</label>
                                 <input type="number" class="form-control rounded-pill" id="idade" name="idade" min="0" max="30" required>
                             </div>
                         </div>
                         
                         <div class="mb-3">
-                            <label for="porte" class="form-label fw-bold">Porte *</label>
+                            <label for="porte" class="form-label fw-bold text-white">Porte *</label>
                             <select class="form-select rounded-pill" id="porte" name="porte" required>
                                 <option value="">Selecione o porte</option>
                                 <option value="pequeno">Pequeno</option>
@@ -75,23 +75,23 @@
                         </div>
                         
                         <div class="mb-3">
-                            <label for="personalidade" class="form-label fw-bold">Personalidade *</label>
+                            <label for="personalidade" class="form-label fw-bold text-white">Personalidade *</label>
                             <textarea class="form-control rounded-3" id="personalidade" name="personalidade" rows="3" required placeholder="Descreva a personalidade do pet..."></textarea>
                         </div>
                         
                         <div class="mb-3">
-                            <label for="descricao" class="form-label fw-bold">Descrição</label>
+                            <label for="descricao" class="form-label fw-bold text-white">Descrição</label>
                             <textarea class="form-control rounded-3" id="descricao" name="descricao" rows="4" placeholder="Informações adicionais sobre o pet..."></textarea>
                         </div>
                         
                         <div class="mb-4">
-                            <label for="imagem" class="form-label fw-bold">Imagem do Pet</label>
+                            <label for="imagem" class="form-label fw-bold text-white">Imagem do Pet</label>
                             <input type="file" class="form-control rounded-pill" id="imagem" name="imagem" accept="image/*">
-                            <div class="form-text">Formatos aceitos: JPG, PNG, GIF</div>
+                            <div class="form-text text-white-50">Formatos aceitos: JPG, PNG, GIF</div>
                         </div>
                         
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">
+                            <button type="submit" class="btn bg-marycats-yellow text-marycats-dark-pink btn-lg rounded-pill fw-bold border-0">
                                 <i class="fas fa-save me-2"></i>Cadastrar Pet
                             </button>
                         </div>

@@ -4,144 +4,115 @@
 {% block title %}{{ pet.nome }} - Detalhes - Totem de Adoção{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row">
-        <!-- Coluna da Esquerda - Imagens -->
-        <div class="col-lg-6 mb-4">
-            <!-- Imagem Principal -->
-            <div class="card border-0 shadow-sm rounded-4 mb-3">
-                <div class="card-body p-0">
-                    {% if imagens.first %}
-                        <img src="{{ imagens.first.imagem.url }}" 
-                             class="img-fluid w-100 rounded-4 imagem-principal" 
-                             alt="{{ pet.nome }}">
-                    {% elif static_image_path %}
-                        <img src="{% static static_image_path %}" 
-                             class="img-fluid w-100 rounded-4 imagem-principal" 
-                             alt="{{ pet.nome }}">
-                    {% else %}
-                        <div class="d-flex align-items-center justify-content-center sem-foto">
-                            <div class="text-center text-muted">
-                                <i class="fas fa-paw fa-5x mb-3"></i>
-                                <h5>Sem foto disponível</h5>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-            
-            <!-- Miniaturas -->
-            {% if imagens.count > 1 %}
-                <div class="row g-2">
-                    {% for imagem in imagens|slice:":4" %}
-                        {% if not forloop.first %}
-                            <div class="col-3">
-                                <img src="{{ imagem.imagem.url }}" 
-                                     class="img-fluid rounded-2 cursor-pointer miniatura" 
-                                     alt="{{ pet.nome }}" 
-                                     onclick="trocarImagemPrincipal('{{ imagem.imagem.url }}')">
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+<div class="container-fluid bg-dark-pink h-100 p-0">
+    <!-- Imagem Principal no Topo -->
+    <div class="row g-0">
+        <div class="col-12">
+            {% if imagens.first %}
+                <img src="{{ imagens.first.imagem.url }}" 
+                     class="w-100" 
+                     style="height: 40vh; object-fit: cover;"
+                     alt="{{ pet.nome }}">
+            {% elif static_image_path %}
+                <img src="{% static static_image_path %}" 
+                     class="w-100"
+                     style="height: 50vh; object-fit: cover;"
+                     alt="{{ pet.nome }}">
+            {% else %}
+                <div class="d-flex align-items-center justify-content-center bg-secondary" style="height: 50vh;">
+                    <div class="text-center text-white">
+                        <i class="fas fa-paw fa-5x mb-3"></i>
+                        <h5>Sem foto disponível</h5>
+                    </div>
                 </div>
             {% endif %}
         </div>
-        
-        <!-- Coluna da Direita - Informações -->
-        <div class="col-lg-6">
-            <!-- Nome e Tipo -->
-            <div class="mb-4">
-                <h1 class="display-4 fw-bold text-primary mb-2">{{ pet.nome }}</h1>
-                <p class="lead text-muted mb-0">
-                    <i class="fas fa-tag me-2"></i>{{ pet.raca }} • {{ pet.get_tipo_display }}
-                </p>
-            </div>
-            
-            <!-- Cards de Informações -->
-            <div class="row g-3 mb-4">
-                <div class="col-6">
-                    <div class="card bg-primary bg-opacity-10 border-0 rounded-3">
-                        <div class="card-body text-center">
-                            <i class="fas fa-calendar-alt fa-2x text-primary mb-2"></i>
-                            <h5 class="card-title text-primary">Idade</h5>
-                            <p class="card-text fw-bold">{{ pet.idade }} ano{{ pet.idade|pluralize }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card bg-success bg-opacity-10 border-0 rounded-3">
-                        <div class="card-body text-center">
-                            <i class="fas fa-weight fa-2x text-success mb-2"></i>
-                            <h5 class="card-title text-success">Porte</h5>
-                            <p class="card-text fw-bold">{{ pet.get_porte_display }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Personalidade -->
-            <div class="card border-0 shadow-sm rounded-4 mb-4">
-                <div class="card-body">
-                    <h5 class="card-title text-primary mb-3">
-                        <i class="fas fa-heart me-2"></i>Personalidade
-                    </h5>
-                    <p class="card-text">{{ pet.personalidade }}</p>
-                </div>
-            </div>
-            
-            <!-- Descrição -->
-            {% if pet.descricao %}
-                <div class="card border-0 shadow-sm rounded-4 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary mb-3">
-                            <i class="fas fa-info-circle me-2"></i>Sobre {{ pet.nome }}
-                        </h5>
-                        <p class="card-text">{{ pet.descricao|linebreaks }}</p>
-                    </div>
-                </div>
-            {% endif %}
-            
-            <!-- Status -->
-            <div class="card border-0 shadow-sm rounded-4 mb-4">
-                <div class="card-body">
-                    <h5 class="card-title text-primary mb-3">
-                        <i class="fas fa-check-circle me-2"></i>Status
-                    </h5>
-                    {% if pet.disponivel %}
-                        <span class="badge bg-success fs-6 rounded-pill">
-                            <i class="fas fa-check me-1"></i>Disponível para Adoção
-                        </span>
-                    {% else %}
-                        <span class="badge bg-secondary fs-6 rounded-pill">
-                            <i class="fas fa-times me-1"></i>Indisponível
-                        </span>
+    </div>
+    
+    <div class="container py-4">
+        <!-- Miniaturas -->
+        {% if imagens.count > 1 %}
+            <div class="d-flex gap-2 mb-4 justify-content-center">
+                {% for imagem in imagens|slice:":4" %}
+                    {% if not forloop.first %}
+                        <img src="{{ imagem.imagem.url }}" 
+                             class="rounded-2 cursor-pointer miniatura" 
+                             alt="{{ pet.nome }}" 
+                             style="height: 80px; width: 80px; object-fit: cover;"
+                             onclick="trocarImagemPrincipal('{{ imagem.imagem.url }}')">
                     {% endif %}
-                </div>
+                {% endfor %}
             </div>
-            
-            <!-- Botões de Ação -->
-            <div class="d-grid gap-3">
-                {% if pet.disponivel %}
-                    <button class="btn btn-primary btn-lg rounded-pill fw-bold" onclick="mostrarInteresse()">
-                        <i class="fas fa-heart me-2"></i>Tenho Interesse na Adoção
-                    </button>
+        {% endif %}
+        
+        <!-- Nome e Tipo -->
+        <div class="mb-4 text-center">
+            <h1 class="display-4 fw-bold text-marycats-yellow mb-2">{{ pet.nome }}</h1>
+            <p class="lead text-white-50 mb-0">
+                <i class="fas fa-tag me-2 text-marycats-yellow"></i>{{ pet.raca }} • {{ pet.get_tipo_display }}
+            </p>
+        </div>
+        
+        <div class="row">
+            <!-- Informações do Pet -->
+            <div class="col-lg-6">
+                <!-- Card Único com Flex Layout -->
+                <div class="card border-0 shadow-lg rounded-4 mb-4 bg-white bg-opacity-10">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-4 justify-content-around">
+                            <!-- Idade -->
+                            <div class="text-center">
+                                <i class="fas fa-calendar-alt fa-3x text-marycats-yellow mb-3"></i>
+                                <h4 class="text-white mb-2">Idade</h4>
+                                <p class="fw-bold text-white mb-0 fs-4">{{ pet.idade }} ano{{ pet.idade|pluralize }}</p>
+                            </div>
+                            
+                            <!-- Porte -->
+                            <div class="text-center">
+                                <i class="fas fa-weight fa-3x text-marycats-yellow mb-3"></i>
+                                <h4 class="text-white mb-2">Porte</h4>
+                                <p class="fw-bold text-white mb-0 fs-4">{{ pet.get_porte_display }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Personalidade -->
+                <div class="card border-0 shadow-lg rounded-4 mb-4 bg-white bg-opacity-10">
+                    <div class="card-body">
+                        <h4 class="card-title text-marycats-yellow mb-3">
+                            <i class="fas fa-heart me-2"></i>Personalidade
+                        </h4>
+                        <p class="card-text text-white fs-5">{{ pet.personalidade }}</p>
+                    </div>
+                </div>
+                
+                <!-- Descrição -->
+                {% if pet.descricao %}
+                    <div class="card border-0 shadow-lg rounded-4 mb-4 bg-white bg-opacity-10">
+                        <div class="card-body">
+                            <h4 class="card-title text-marycats-yellow mb-3">
+                                <i class="fas fa-info-circle me-2"></i>Sobre {{ pet.nome }}
+                            </h4>
+                            <div class="card-text text-white fs-5">{{ pet.descricao|linebreaks }}</div>
+                        </div>
+                    </div>
                 {% endif %}
-                <a href="{% url 'resultados' %}" class="btn btn-outline-secondary btn-lg rounded-pill">
-                    <i class="fas fa-arrow-left me-2"></i>Voltar para Lista
-                </a>
             </div>
             
             <!-- QR Code -->
-            <div class="card border-0 shadow-sm rounded-4 mt-4">
-                <div class="card-body text-center">
-                    <h6 class="card-title text-primary mb-3">
-                        <i class="fas fa-qrcode me-2"></i>QR Code - Formulário de Adoção
-                    </h6>
-                    <img src="{% static 'images/Forms_qrcode.png' %}" 
-                         class="img-fluid" 
-                         alt="QR Code para formulário de adoção"
-                         style="max-width: 150px;">
-                    <p class="text-muted small mt-2 mb-0">Escaneie para acessar o formulário</p>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-lg rounded-4 bg-marycats-yellow">
+                    <div class="card-body text-center">
+                        <h6 class="card-title text-marycats-dark-pink mb-3 fw-bold">
+                            <i class="fas fa-qrcode me-2"></i>QR Code - Formulário de Adoção
+                        </h6>
+                        <img src="{% static 'images/Forms_qrcode.png' %}"
+                             class="img-fluid" 
+                             alt="QR Code para formulário de adoção"
+                             style="max-width: 300px;">
+                        <p class="text-marycats-dark-pink mt-2 mb-0 fw-semibold">Escaneie para acessar o formulário</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -181,8 +152,11 @@
 
 <script>
 function trocarImagemPrincipal(url) {
-    // Trocar imagem principal
-    document.querySelector('.card-img-top').src = url;
+    // Trocar imagem principal no topo
+    const imgPrincipal = document.querySelector('.row.g-0 img');
+    if (imgPrincipal) {
+        imgPrincipal.src = url;
+    }
 }
 
 function mostrarInteresse() {

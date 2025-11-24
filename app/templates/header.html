@@ -1,7 +1,7 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-dark-pink shadow-sm sticky-top justify-content-center">
-    <div class="contain er">
-        <a class="navbar-brand fw-bold text-primary" href="{% url 'tela_comecar' %}">
+<nav class="navbar navbar-expand-lg fixed-top {% if 'pergunta' in request.resolver_match.url_name %}navbar-other-pages{% else %}navbar-home{% endif %}">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand fw-bold" href="{% url 'tela_comecar' %}">
             <img src="{% static 'images/MaryCats_Branco.png' %}" alt="Logo" class="me-2 logo">
         </a>
         
