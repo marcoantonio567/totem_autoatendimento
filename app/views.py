@@ -63,8 +63,7 @@ def footer(request):
 
 def tela_comecar(request):
     """Tela inicial com botão para começar o fluxo"""
-    # Get available pets for carousel
-    pets = Pet.objects.filter(disponivel=True)[:6]  # Limit to 6 pets for carousel
+    pets = Pet.objects.filter(disponivel=True).exclude(nome__iexact='Buddy')[:6]
     
     return render(request, 'comecar.html', {
         'pets': pets

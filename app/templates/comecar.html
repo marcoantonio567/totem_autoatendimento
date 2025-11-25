@@ -20,11 +20,13 @@
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <a href="{% url 'pet_detalhes' pet_id=pet.id %}" class="carousel-pet-link">
                 <div class="position-relative carousel-image-container">
-                    <img src="{{ pet.imagens.first.imagem.url }}" class="d-block w-100 carousel-image" alt="{{ pet.nome }}">
-                    <!-- Overlay gradient for text readability -->
+                    {% if pet.imagens.first %}
+                        <img src="{{ pet.imagens.first.imagem.url }}" class="d-block w-100 carousel-image" alt="{{ pet.nome }}">
+                    {% else %}
+                        <img src="{% static 'images/info-pets/Imagens/' %}{{ pet.nome }}.png" class="d-block w-100 carousel-image" alt="{{ pet.nome }}">
+                    {% endif %}
                     <div class="carousel-overlay"></div>
 
-                    <!-- Pet caption -->
                     <div class="carousel-caption d-flex flex-column justify-content-end h-100 pb-5">
                         <div class="bg-dark bg-opacity-75 rounded-3 p-3 mx-auto" style="max-width: 300px;">
                             <h5 class="text-white mb-1 fw-bold">{{ pet.nome }}</h5>
