@@ -1,199 +1,154 @@
-# 🐕 Totem de Autoatendimento para Adoção de Pets
+# 🐕 Self-Service Kiosk for Pet Adoption
 
-Sistema inteligente de totem de autoatendimento que conecta pets disponíveis para adoção com pessoas compatíveis através de um fluxo de decisão interativo.
+Intelligent self-service kiosk system that connects pets available for adoption with compatible people through an interactive decision flow.
 
-## 🎯 Funcionalidades Principais
+## 🎯 Main Features
 
-### ✅ Sistema de Fluxo de Decisão
-- **Interface intuitiva** com múltiplas escolhas sequenciais
-- **Algoritmo inteligente** que calcula compatibilidade baseado nas preferências
-- **2 caminhos de decisão distintos**: Família com crianças e Apartamento pequeno
-- **5 perguntas interativas** sobre tipo, porte, idade, personalidade e tempo disponível
+### ✅ Decision Flow System
+- **Intuitive interface** with multiple sequential choices
+- **Intelligent algorithm** that calculates compatibility based on preferences
+- **2 distinct decision paths**: Family with children and Small apartment
+- **5 interactive questions** about type, size, age, personality, and available time
 
-### ✅ Cadastro de Pets
-- **Formulário completo** com validação de dados
-- **Campos**: nome, tipo (cachorro/gato), raça, idade, porte, personalidade
-- **Upload de imagens** com preview em tempo real
-- **Armazenamento seguro** em banco de dados relacional
+### ✅ Pet Registration
+- **Complete form** with data validation
+- **Fields**: name, type (dog/cat), breed, age, size, personality
+- **Image upload** with real-time preview
+- **Secure storage** in a relational database
 
-### ✅ Recuperação de Informações
-- **Sistema de busca inteligente** com filtros baseados nas escolhas do usuário
-- **Ordenação por compatibilidade** (0-100%)
-- **Exibição clara e organizada** com cards interativos
-- **Recomendações personalizadas** baseadas no perfil do usuário
+### ✅ Information Retrieval
+- **Intelligent search system** with filters based on user choices
+- **Sort by compatibility** (0-100%)
+- **Clear and organized display** with interactive cards
+- **Personalized recommendations** based on the pet's profile User
 
-### ✅ Interface Responsiva
-- **Design moderno** com Bootstrap 5.3
-- **Otimizado para touch screen** de totens
-- **100% responsivo** para diferentes tamanhos de tela
-- **Animações suaves** e feedback visual
+### ✅ Responsive Interface
+- **Modern design** with Bootstrap 5.3
+- **Optimized for touch screen** kiosks
+- **100% responsive** for different screen sizes
+- **Smooth animations** and visual feedback
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Technologies Used
 
 - **Backend**: Django 5.2.8 (Python)
 - **Frontend**: Django Templates, Bootstrap 5.3, JavaScript
-- **Banco de Dados**: SQLite (desenvolvimento) / PostgreSQL (produção)
-- **Estilos**: CSS3 com gradientes e animações
-- **Ícones**: Font Awesome 6.4
+- **Database**: SQLite (development) / PostgreSQL (production)
+- **Styles**: CSS3 with gradients and animations
+- **Icons**: Font Awesome 6.4
 
-## 📋 Documentação
+## 📋 Documentation
 
-- [📄 Requisitos do Produto](.trae/documents/prd-requisitos-totem-pet.md)
-- [🏗️ Arquitetura Técnica](.trae/documents/arquitetura-tecnica-totem-pet.md)
-- [📊 Relatório de Fluxo de Decisão](.trae/documents/relatorio-fluxo-decisao.md)
-- [📖 Guia de Instalação e Uso](.trae/documents/guia-instalacao-uso.md)
+- [📄 Product Requirements](.trae/documents/prd-requisitos-totem-pet.md)
+- [🏗️ Architecture] [Technical](.trae/documents/arquitetura-tecnica-totem-pet.md)
+- [📊 Decision Flow Report](.trae/documents/relatorio-fluxo-decisao.md)
+- [📖 Installation and Usage Guide](.trae/documents/guia-instalacao-uso.md)
 
-## ⚡ Instalação Rápida
+## ⚡ Quick Installation
 
-### Opção 1: Script Automático
+### Option 1: Automatic Script
 ```bash
-# Executar script de configuração automática
-python executar_sistema.py
+# Run automatic configuration script
+python execute_system.py
 ```
 
-### Opção 2: Manual
+### Option 2: Manual
 ```bash
-# Instalar dependências
+# Install dependencies
 pip install django==5.2.8 pillow
 
-# Configurar banco de dados
+# Configure database
 python manage.py makemigrations
 python manage.py migrate
 
-# Criar dados de teste (opcional)
-python criar_dados_teste.py
+# Create test data (optional)
+python create_test_data.py
 
-# Iniciar servidor
+# Start server
 python manage.py runserver 0.0.0.0:8000
 ```
 
-## 🌐 Acesso ao Sistema
+## 🌐 System Access
 
-Após iniciar o servidor, acesse:
-- **Sistema Principal**: http://localhost:8000/
-- **Admin Django**: http://localhost:8000/admin/
+After starting the server, access:
+- **Main System**: http://localhost:8000/
+- **Django Admin**: http://localhost:8000/admin/
 
-## 📱 Fluxo de Uso
+## 📱 Usage Flow
 
-### Para Usuários
-1. **Início**: Tela inicial com botão "Começar Agora"
-2. **Perguntas**: Responda 5 perguntas sobre preferências
-3. **Resultados**: Veja pets compatíveis ordenados por compatibilidade
-4. **Detalhes**: Visualize informações completas do pet escolhido
-5. **Interesse**: Demonstre interesse na adoção
+### For Users
+1. **Home**: Initial screen with "Start Now" button
+2. **Questions**: Answer 5 questions about preferences
+3. **Results**: View compatible pets sorted by compatibility
+4. **Details**: View complete information about the chosen pet
+5. **Interest**: Express interest in adoption
 
-### Para Administradores
-1. **Cadastro**: Use o formulário para adicionar novos pets
-2. **Gestão**: Gerencie pets pelo painel administrativo
-3. **Monitoramento**: Acompanhe estatísticas de uso
+### For Administrators
+1. **Registration**: Use the form to add new pets
+2. **Management**: Manage pets through the administrative panel
+3. **Monitoring**: Track usage statistics
 
 ## 🎨 Design
 
-### Paleta de Cores
-- **Primária**: Azul petróleo (#667eea)
-- **Secundária**: Roxo (#764ba2)
-- **Sucesso**: Verde (#28a745)
-- **Background**: Gradiente suave (#f8f9fa → #e9ecef)
+### Color Palette
+- **Primary**: Teal (#667eea)
+- **Secondary**: Purple (#764ba2)
+- **Follow**: Green (#28a745)
+- **Background**: Soft Gradient (#f8f9fa → #e9ecef)
 
-### Tipografia
-- **Principal**: Helvetica Neue
-- **Títulos**: Bold (700)
-- **Corpo**: Regular (400)
+### Typography
+- **Main**: Helvetica Neue
+- **Titles**: Bold (700)
+- **Body**: Regular (400)
 
-## 🔧 Algoritmo de Compatibilidade
+## 🔧 Compatibility Algorithm
 
-O sistema calcula compatibilidade baseado em:
-- **Tipo de Pet** (0-40 pontos)
-- **Porte** (0-25 pontos)
-- **Idade** (0-20 pontos)
-- **Personalidade** (0-15 pontos)
+The system calculates compatibility based on:
+- **Pet Type** (0-40 points)
+- **Size** (0-25 points)
+- **Age** (0-20 points)
+- **Personality** (0-15 points)
 
-**Resultado**: Score de 0-100% com mínimo de 50% para exibição
+**Result**: Score from 0-100% with Minimum of 50% for display
 
-## 📊 Exemplos de Caminhos
+## 📊 Examples of Paths
 
-### Caminho 1: Família com Crianças
-- Tipo: Cachorro → Grande → Filhote/Adulto → Brincalhão → Muito tempo
-- Resultados: Golden Retriever (95%), Labrador (92%), Beagle (88%)
+### Path 1: Family with Children
+- Type: Dog → Large → Puppy/Adult → Playful → Long time
+- Results: Golden Retriever (95%), Labrador (92%), Beagle (88%)
 
-### Caminho 2: Apartamento Pequeno
-- Tipo: Gato → Pequeno → Adulto → Calmo → Pouco tempo
-- Resultados: Persa (90%), Shih Tzu (87%), Maine Coon (85%)
+### Path 2: Small Apartment
+- Type: Cat → Small → Adult → Calm → Short time
+- Results: Persian (90%), Shih Tzu (87%), Maine Coon (85%)
 
-## 🗂️ Estrutura do Projeto
+## 🗂️ Project Structure
 
 ```
 totem_auto/
-├── app/                    # Aplicação principal
-│   ├── models.py          # Modelos de dados
-│   ├── views.py           # Lógica de negócio
-│   ├── urls.py            # Rotas da aplicação
-│   └── templates/         # Templates HTML
-├── static/                # Arquivos estáticos
-│   ├── css/              # Estilos CSS
-│   ├── images/           # Imagens do sistema
-│   └── fonts/            # Fontes customizadas
-├── totem/                 # Configuração Django
-├── media/                 # Uploads de imagens (criado ao executar)
-├── .trae/documents/       # Documentação do projeto
-├── criar_dados_teste.py   # Script de dados de teste
-├── executar_sistema.py    # Script de execução automática
-└── manage.py             # Gerenciador Django
+├── app/ # Main application
+│ ├── models.py # Data models
+│ ├── views.py # Business logic
+│ ├── urls.py # Application routes
+│ └── templates/ # HTML templates
+├── static/ # Static files
+│ ├── css/ # CSS styles
+│ ├── images/ # System images
+│ └── fonts/ # Custom fonts
+├── totem/ # Django configuration
+├── media/ # Image uploads (created on run)
+├── .trae/documents/ # Project documentation
+├── create_test_data.py # Test data script
+├── execute_system.py # Automatic execution script
+└── manage.py # Django Manager
 ```
 
-## 🧪 Testes
+## 🧪 Tests
 
-### Dados de Teste Inclusos
-- 8 pets com diferentes características
-- Mix de cachorros e gatos
-- Diversas raças e personalidades
+### Included Test Data
+- 8 pets with different characteristics
+- Mix of dogs and cats
+- Various breeds and personalities
 
-### Casos de Teste
-- ✅ Fluxo completo de decisão
-- ✅ Cadastro de novos pets
-- ✅ Sistema de compatibilidade
-- ✅ Responsividade multi-dispositivo
-- ✅ Validação de formulários
-
-## 🔒 Segurança
-
-- **CSRF Protection**: Tokens CSRF em todos os formulários
-- **Validação de Dados**: Server-side validation
-- **SQL Injection Protection**: ORM Django com proteção integrada
-- **XSS Protection**: Templates Django com auto-escape
-
-## 📈 Performance
-
-- **Tempo de Resposta**: < 1 segundo para buscas
-- **Otimização de Queries**: Índices em campos frequentemente buscados
-- **Cache de Sessão**: Preferências armazenadas localmente
-- **Imagens Otimizadas**: Upload com compressão automática
-
-## 🤝 Contribuindo
-
-1. Fork o projeto
-2. Crie sua feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## 📞 Suporte
-
-- **Documentação**: Consulte os arquivos em `.trae/documents/`
-- **Issues**: Reporte problemas no repositório
-- **Email**: suporte@totempet.com
-
-## 🙏 Agradecimentos
-
-- Django Framework pela excelente base de desenvolvimento
-- Bootstrap pela interface responsiva
-- Font Awesome pelos ícones
-- Comunidade open source pelos recursos e inspiração
-
----
-
-**❤️ Desenvolvido com amor para ajudar pets a encontrarem lares am
+### Test Cases
+- ✅ Complete decision flow
+- ✅ Registration of new pets
+- ✅ System
